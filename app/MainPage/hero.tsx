@@ -9,7 +9,7 @@ import Modal from 'react-modal';
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Skills from './skills2'; // Asegúrate de actualizar esta ruta para que apunte al archivo de tu componente Skills
-
+import Image from 'next/image';
 export default function Hero() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="w-full lg:w-1/2 p-8 space-y-8">
           <TypeAnimation
             sequence={[
-              'Hola, soy Daniel',
+              'Hola, soy Daniel ',
               1000,
               'Soy un desarrollador de software',
               1000,
@@ -57,7 +57,7 @@ export default function Hero() {
             
           </Link>
           <button onClick={() => setModalOpen(true)} className="ml-4 px-6 py-3 text-lg font-bold text-indigo-600 border-2 border-indigo-600 rounded-full hover:bg-indigo-600 hover:text-white transition-colors duration-300">Leer más sobre mí</button>
-          <img src="/pngegg.png" alt="Your Name" className="w-full h-64 object-cover object-center lg:h-full mt-8" onLoad={() => setImageLoaded(true)} style={{ display: imageLoaded ? 'block' : 'none' }} />
+          <Image src="/pngegg.png" alt="Your Name" height={500} width={500}  />
           <Modal
             isOpen={isModalOpen}
             onRequestClose={() => setModalOpen(false)}
