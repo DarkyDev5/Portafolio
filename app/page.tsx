@@ -1,15 +1,15 @@
 import type { AppProps } from 'next/app'
 import Navbar from './MainPage/navbar'
 import Footer from './MainPage/footer'
-import MainPage from './MainPage/hero'
+import Hero from './MainPage/hero'
 import Skills from './MainPage/skills2'
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MainPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
-       <MainPage/>
+       <Hero/>
        <Skills/>
       </main>
       <Footer />
@@ -17,4 +17,3 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
