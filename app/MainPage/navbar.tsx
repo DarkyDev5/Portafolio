@@ -58,19 +58,19 @@ export default function Navbar() {
                   Inicio
                 </Link>
                 <Link
-                  href="/about"
+                  href="/Sobre-Nosotros"
                   className={`text-sm font-medium transition-all duration-200 ${
-                    pathname === "/about"
+                    pathname === "/Sobre-Nosotros"
                       ? "text-indigo-600"
                       : "text-gray-700 hover:text-indigo-600"
                   }`}
                 >
-                  Sobre mí
+                  Sobre Nosotros
                 </Link>
                 <Link
-                  href="/projects"
+                  href="/Proyectos"
                   className={`text-sm font-medium transition-all duration-200 ${
-                    pathname === "/projects"
+                    pathname === "/Proyectos"
                       ? "text-indigo-600"
                       : "text-gray-700 hover:text-indigo-600"
                   }`}
@@ -79,7 +79,7 @@ export default function Navbar() {
                 </Link>
                   
                 <Link
-                href="/contact"
+                href="/Contacto"
                 className="px-3 py-2 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
               >
                 Contáctame
@@ -186,9 +186,9 @@ export default function Navbar() {
                 Proyectos
               </Link>
               <Link
-                href="/contact"
+                href="/Contacto"
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  pathname === "/contact"
+                  pathname === "/Contacto"
                     ? "text-indigo-600"
                     : "text-gray-700 hover:text-indigo-600"
                 }`}
