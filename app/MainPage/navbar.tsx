@@ -2,17 +2,13 @@
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "../ThemeContext";
+
 import Image from "next/image";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-
-  // Usa useTheme para obtener el tema y la función para cambiar el tema
-  const { theme, setTheme } = useTheme();
-
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -29,14 +25,10 @@ export default function Navbar() {
     };
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
   return (
     <nav
       className={`fixed w-full z-10 transition-all duration-200 ${
-        isScrolled ? "bg-white shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-blue z-20 shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +41,7 @@ export default function Navbar() {
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link
                   href="/"
-                  className={`text-sm font-medium transition-all duration-200 ${
+                  className={`text-sm font-medium transition-all duration-200 text-white ${
                     pathname === "/"
                       ? "text-indigo-600"
                       : "text-gray-700 hover:text-indigo-600"
@@ -59,7 +51,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/Sobre-Nosotros"
-                  className={`text-sm font-medium transition-all duration-200 ${
+                  className={`text-sm font-medium transition-all duration-200 text-white ${
                     pathname === "/Sobre-Nosotros"
                       ? "text-indigo-600"
                       : "text-gray-700 hover:text-indigo-600"
@@ -69,7 +61,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/Proyectos"
-                  className={`text-sm font-medium transition-all duration-200 ${
+                  className={`text-sm font-medium transition-all duration-200 text-white ${
                     pathname === "/Proyectos"
                       ? "text-indigo-600"
                       : "text-gray-700 hover:text-indigo-600"
@@ -87,26 +79,7 @@ export default function Navbar() {
 
               <div className="flex items-center space-x-4">
              
-              <button
-                onClick={toggleTheme}
-                className="text-gray-500 hover:text-indigo-600"
-              >
-                {theme === "light" ? (
-                  <Image
-                    src="/moon.svg"
-                    alt="Dark Mode Icon"
-                    width={24}
-                    height={24}
-                  />
-                ) : (
-                  <Image
-                    src="/sun.png"
-                    alt="Light Mode Icon"
-                    width={24}
-                    height={24}
-                  />
-                )}
-              </button>
+              
               </div>
             </div>
           </div>

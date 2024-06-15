@@ -1,5 +1,4 @@
 "use client";
-import { useTheme } from "../ThemeContext";
 import Link from 'next/link';
 
 interface Project {
@@ -37,14 +36,12 @@ const projects: Project[] = [
 ];
 
 export default function ProjectCard() {
-  const { theme } = useTheme();
-  const backgroundColor = theme === "light" ? "bg-white" : "bg-gray-900";
-  const textColor = theme === "light" ? "text-gray-900" : "text-white";
+
 
   return (
-    <div className={`min-h-screen ${backgroundColor} py-20`}>
+    <div className={`min-h-screen  py-20`}>
       <div className="container mx-auto">
-        <h1 className={`text-4xl font-extrabold mb-12 ${textColor} text-center`}>
+        <h1 className={`text-4xl font-extrabold mb-12  text-center`}>
           Proyectos
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -61,7 +58,7 @@ export default function ProjectCard() {
                   />
                   
                   <div className="p-6">
-                    <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
+                    <h3 className={`text-xl font-semibold mb-2`}>
                       {project.title}
                     </h3>
                     <p className="text-gray-600 mb-4">{project.description}</p>

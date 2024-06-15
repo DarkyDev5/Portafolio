@@ -60,40 +60,39 @@ const about = () => {
 
 
 
-
-
-        {/* Services Section */}
+        {/* Sección de Servicios */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            Our Services
+            Nuestros Servicios
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-center">
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Web Development</h3>
-              <p className="text-gray-700">Building responsive and robust web applications.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Desarrollo Web</h3>
+              <p className="text-gray-700">Construcción de aplicaciones web responsivas y robustas.</p>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Mobile Apps</h3>
-              <p className="text-gray-700">Creating seamless mobile experiences for Android and iOS.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Aplicaciones Móviles</h3>
+              <p className="text-gray-700">Creación de experiencias móviles perfectas para Android e iOS.</p>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Cloud Solutions</h3>
-              <p className="text-gray-700">Providing scalable and secure cloud infrastructure.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Soluciones en la Nube</h3>
+              <p className="text-gray-700">Provisión de infraestructura en la nube escalable y segura.</p>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>E-commerce</h3>
-              <p className="text-gray-700">Developing customized e-commerce solutions.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Comercio Electrónico</h3>
+              <p className="text-gray-700">Desarrollo de soluciones de comercio electrónico personalizadas.</p>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>SEO Optimization</h3>
-              <p className="text-gray-700">Improving your search engine rankings.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Optimización SEO</h3>
+              <p className="text-gray-700">Mejora de sus rankings en los motores de búsqueda.</p>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Digital Marketing</h3>
-              <p className="text-gray-700">Creating effective marketing campaigns.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Marketing Digital</h3>
+              <p className="text-gray-700">Creación de campañas de marketing efectivas.</p>
             </div>
           </div>
         </section>
+
       
         {/* Vision and Mission Section */}
         <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg mb-16">
@@ -102,12 +101,12 @@ const about = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Vision</h3>
-              <p className="text-gray-700">To be the leading tech start-up agency, known for innovation and excellence.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Visión</h3>
+              <p className="text-gray-700">Ser reconocidos como líderes en la industria tecnológica por nuestra capacidad para proporcionar servicios de desarrollo web y aplicaciones móviles que evocan seguridad, confianza y calidad. Aspiramos a posicionarnos como una de las principales empresas de servicios tecnológicos, ofreciendo soluciones funcionales y efectivas que impulsan el éxito de nuestros clientes.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Mission</h3>
-              <p className="text-gray-700">To empower businesses with cutting-edge technology solutions that drive growth and success.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Misión</h3>
+              <p className="text-gray-700">Ofrecer soluciones innovadoras y de alta calidad en el desarrollo de páginas web y aplicaciones móviles, satisfaciendo las necesidades específicas de nuestros clientes a través de un enfoque respetuoso, honesto y orientado a la excelencia. Nos comprometemos a ayudar a nuestros clientes a resolver sus problemas tecnológicos y alcanzar sus objetivos empresariales.</p>
             </div>
           </div>
         </section>
@@ -144,48 +143,50 @@ const about = () => {
           </div>
         </section>
 
+          
         {/* Core Values Section */}
         <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            Our Core Values
+            Nuestros Valores Fundamentales
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-center">
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Innovation</h3>
-              <p className="text-gray-700">We strive to innovate and improve our solutions constantly.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Innovación</h3>
+              <p className="text-gray-700">Nos esforzamos por innovar y mejorar nuestras soluciones constantemente.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Integrity</h3>
-              <p className="text-gray-700">We conduct our business with the highest level of integrity.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Integridad</h3>
+              <p className="text-gray-700">Conducimos nuestro negocio con el más alto nivel de integridad.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Excellence</h3>
-              <p className="text-gray-700">We aim for excellence in everything we do.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Excelencia</h3>
+              <p className="text-gray-700">Apuntamos a la excelencia en todo lo que hacemos.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text              -2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Collaboration</h3>
-              <p className="text-gray-700">We believe in the power of teamwork and collaboration.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Colaboración</h3>
+              <p className="text-gray-700">Creemos en el poder del trabajo en equipo y la colaboración.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Customer Focus</h3>
-              <p className="text-gray-700">Our customers are at the center of everything we do.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Enfoque en el Cliente</h3>
+              <p className="text-gray-700">Nuestros clientes están en el centro de todo lo que hacemos.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Sustainability</h3>
-              <p className="text-gray-700">We are committed to sustainable business practices.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Sostenibilidad</h3>
+              <p className="text-gray-700">Estamos comprometidos con prácticas empresariales sostenibles.</p>
             </div>
           </div>
         </section>
 
+
         {/* News and Updates Section */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            News and Updates
+            Noticias y actualizaciones
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-center">
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
-              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>New Product Launch</h3>
-              <p className="text-gray-700">We are excited to announce the launch of our new product, XYZ, which is set to revolutionize the industry.</p>
+              <h3 className="text-2xl font-semibold mb-4" style={{ color: '#4f46e5' }}>Actualizamos Conociendo Colombia</h3>
+              <p className="text-gray-700">Renovamos la interfaz de Conociendo Colombia para que por fin taches de tu lista este bello pais.</p>
               <a href="#" className="text-purple-700 hover:underline mt-4 inline-block">Read more</a>
             </div>
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
@@ -201,44 +202,44 @@ const about = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
+
+        {/* Sección de Contacto */}
         <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            Get in Touch
+            Ponte en contacto 
           </h2>
           <form className="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Name
+                Nombre
               </label>
-              <input className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="name" type="text" placeholder="Your Name" />
+              <input className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="name" type="text" placeholder="Tu Nombre" required />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                 Email
               </label>
-              <input className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="email" type="email" placeholder="Your Email" />
+              <input className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="email" type="email" placeholder="Tu Email" required />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-                Message
+                ¿Puedes proporcionar una descripción general del proyecto que necesitas (desarrollo web o aplicación móvil)?
               </label>
-              <textarea className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="message"  placeholder="Your Message"></textarea>
+              <textarea className="w-full px-3 py-2 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" id="message" placeholder="Tu Mensaje" required></textarea>
             </div>
             <div className="text-center">
               <button className="bg-purple-700 text-white py-3 px-8 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 transform hover:scale-105">
-                Send Message
+                Enviar Mensaje
               </button>
             </div>
           </form>
         </section>
 
   
-
         {/* Blog Section */}
         <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            From Our Blog
+            Nuestro Blog
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-center">
             <div className="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
@@ -263,7 +264,7 @@ const about = () => {
          {/* Social Media Section */}
          <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg mb-16">
           <h2 className="text-4xl font-bold mb-12 text-center" style={{ color: '#4f46e5' }}>
-            Follow Us
+            Siguenos en nuestars redes sociales
           </h2>
           <div className="flex justify-center space-x-6">
             <a href="https://facebook.com" className="text-gray-700 hover:text-purple-700 transition duration-300 transform hover:scale-105">
