@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full z-10 transition-all duration-200 ${
-        isScrolled ? "bg-blue z-20 shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-dom-blue z-20 shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

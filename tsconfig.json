@@ -21,6 +21,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/MainPage/skills.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/MainPage/skills.tsx",
+    "app/Sobre-Nosotros/3dcharater.tsx"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,3 @@
-// next.config.mjs
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -14,6 +12,16 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  webpack(config, options) {
+    config.module.rules.push({
+      test: /\.(glb|gltf)$/,
+      use: {
+        loader: 'file-loader',
+      },
+    });
+
+    return config;
   },
 };
 
