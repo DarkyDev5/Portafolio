@@ -2,10 +2,20 @@ import dynamic from 'next/dynamic';
 import Navbar from '../MainPage/navbar';
 import AboutGe from './AboutUs';
 import TextContent from './TextContent'; // Import your TextContent component
-import UfoCanva from '../components/UfoCanva';
+
 
 // Import ThreeCanvas dynamically
 const ThreeCanvas = dynamic(() => import('../components/AstroCanva'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+const UfoCanva = dynamic(() => import ('../components/UfoCanva'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+const NaveCanva = dynamic(() => import ('../components/NaveCanva'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
@@ -22,8 +32,10 @@ export default function About() {
       </video>
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 mt-16">
         <ThreeCanvas /> {/* Render ThreeCanvas first */}
-        <TextContent /> {/* Render TextContent afterwards */}
+        <NaveCanva/>
         <UfoCanva />
+        <TextContent /> {/* Render TextContent afterwards */}
+      
       
       </div>
     </div>
