@@ -1,4 +1,5 @@
 // pages/about.tsx
+"use client"
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Navbar from '../MainPage/navbar';
