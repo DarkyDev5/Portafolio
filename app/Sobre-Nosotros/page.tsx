@@ -6,17 +6,17 @@ import TextContent from './TextContent'; // Import your TextContent component
 
 // Import ThreeCanvas dynamically
 const ThreeCanvas = dynamic(() => import('../components/AstroCanva'), {
-  ssr: true,
+  ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
 const UfoCanva = dynamic(() => import ('../components/UfoCanva'), {
-  ssr: true,
+  ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
 const NaveCanva = dynamic(() => import ('../components/NaveCanva'), {
-  ssr: true,
+  ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
