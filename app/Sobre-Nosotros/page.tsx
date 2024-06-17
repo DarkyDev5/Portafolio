@@ -32,7 +32,6 @@ export default function About() {
       </video>
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 mt-16">
         <ThreeCanvas /> {/* Render ThreeCanvas first */}
-        <NaveCanva/>
         <UfoCanva />
         <TextContent /> {/* Render TextContent afterwards */}
       
