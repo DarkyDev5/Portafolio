@@ -84,12 +84,9 @@ const Model: React.FC<ModelProps> = ({ path }) => {
 const ThreeCanvas: React.FC = () => {
   return (
     <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full ">
-      <ambientLight intensity={1} />
-      <directionalLight position={[10, 10, 10]} intensity={1.5} />
-      <spotLight position={[15, 20, 5]} angle={0.3} intensity={1.5} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} intensity={1} />
-      <hemisphereLight intensity={0.5} />
-      <group position={[0, -1, 0]} scale={[1.5, 1.5, 1]} rotation={[0, 0, 1]}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 10]} intensity={1} />
+      <group position={[0, -1, 0]} scale={[1.5, 1.5, 1]}>
         <Model path="/lol.glb" />
       </group>
       <OrbitControls />

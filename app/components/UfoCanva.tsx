@@ -29,14 +29,9 @@ const Model: React.FC<ModelProps> = ({ path }) => {
 const UfoCanvas: React.FC = () => {
   return (
     <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full">
-      <ambientLight intensity={2} />
-      <directionalLight position={[10, 10, 10]} intensity={3} />
-      <spotLight position={[15, 20, 5]} angle={0.3} intensity={3} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} intensity={3} />
-      <hemisphereLight intensity={1.5} />
-      <pointLight position={[10, -10, -10]} intensity={2} />
-      <pointLight position={[-10, 10, 10]} intensity={2} />
-      <group position={[10, -1, 0]} scale={[0.5, 0.5, 0.5]} rotation={[0, 0, 0]}>
+      <ambientLight intensity={1} />
+      <directionalLight position={[10, 10, 10]} intensity={1.5} />
+      <group position={[10, -1, 0]} scale={[0.5, 0.5, 0.5]}>
         <Model path="/ufo4.glb" />
       </group>
       <OrbitControls />
