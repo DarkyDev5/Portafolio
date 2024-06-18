@@ -1,20 +1,22 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
+import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 // Extend OrbitControls
 extend({ OrbitControls });
 
 // Cargar texturas manualmente
 const texturePaths = [
-  '/TEXTURES/gltf_embedded_0.jpg', // Convertido a JPG
-  '/TEXTURES/gltf_embedded_1.jpg', // Convertido a JPG
-  '/TEXTURES/gltf_embedded_2.jpg', // Convertido a JPG
-  '/TEXTURES/gltf_embedded_4.jpg', // Convertido a JPG
-  '/TEXTURES/gltf_embedded_5.jpg', // Convertido a JPG
-  '/TEXTURES/gltf_embedded_6.jpg', // Convertido a JPG
+  '/TEXTURES/gltf_embedded_0.webp', 
+  '/TEXTURES/gltf_embedded_1.webp', 
+  '/TEXTURES/gltf_embedded_2.webp', 
+  '/TEXTURES/gltf_embedded_4.webp', 
+  '/TEXTURES/gltf_embedded_5.webp', 
+  '/TEXTURES/gltf_embedded_6.webp', 
 ];
 
 // Cargar texturas asíncronamente
@@ -32,12 +34,32 @@ interface ModelProps {
   path: string;
 }
 
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/draco/'); // Cambia a la ruta correcta de tu Draco
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
+const useDracoGLTF = (path: string) => {
+  const [gltf, setGltf] = React.useState<GLTF | null>(null);
+
+  useEffect(() => {
+    gltfLoader.load(path, (gltf) => {
+      setGltf(gltf);
+    });
+  }, [path]);
+
+  return gltf;
+};
+
 const Model: React.FC<ModelProps> = ({ path }) => {
-  const { scene, animations } = useGLTF(path);
+  const gltf = useDracoGLTF(path);
   const ref = useRef<THREE.Group>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
 
   useEffect(() => {
+    if (!gltf) return;
+
     (async () => {
       const textures = await loadTextures();
       if (ref.current) {
@@ -61,16 +83,16 @@ const Model: React.FC<ModelProps> = ({ path }) => {
           }
         });
 
-        if (animations && animations.length > 0) {
-          const mixer = new THREE.AnimationMixer(scene);
-          animations.forEach((clip) => {
+        if (gltf.animations && gltf.animations.length > 0) {
+          const mixer = new THREE.AnimationMixer(gltf.scene);
+          gltf.animations.forEach((clip) => {
             mixer.clipAction(clip).play();
           });
           mixerRef.current = mixer;
         }
       }
     })();
-  }, [scene, animations]);
+  }, [gltf]);
 
   useFrame((state, delta) => {
     if (mixerRef.current) {
@@ -78,16 +100,16 @@ const Model: React.FC<ModelProps> = ({ path }) => {
     }
   });
 
-  return <primitive ref={ref} object={scene} />;
+  return gltf ? <primitive ref={ref} object={gltf.scene} /> : null;
 };
 
 const ThreeCanvas: React.FC = () => {
   return (
-    <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full ">
+    <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full">
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 10]} intensity={1} />
       <group position={[0, -1, 0]} scale={[1.5, 1.5, 1]}>
-        <Model path="/lol.glb" />
+        <Model path="/lolDRACOwebp.glb" />
       </group>
       <OrbitControls />
     </Canvas>
