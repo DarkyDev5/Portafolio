@@ -22,6 +22,11 @@ const LazyUfoCanvas = dynamic(() => import('../components/UfoCanva'), {
   loading: () => <p>Loading UfoCanva...</p>,
 });
 
+const LazySpaceShipCanvas = dynamic(() => import('../components/NaveCanva'), {
+  ssr: false,
+  loading: () => <p>Loading UfoCanva...</p>,
+});
+
 export default function About() {
   const [loadCanvases, setLoadCanvases] = useState(false);
 
@@ -39,6 +44,7 @@ export default function About() {
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 mt-16">
         {loadCanvases && <LazyThreeCanvas />}
         {loadCanvases && <LazyUfoCanvas />}
+        {loadCanvases && <LazySpaceShipCanvas />}
         <TextContent />
       </div>
     </div>
