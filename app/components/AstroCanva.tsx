@@ -5,30 +5,15 @@ import { useGLTF, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
 
 // Extend OrbitControls
 extend({ OrbitControls });
 
 // Cargar texturas manualmente
-const texturePaths = [
-  '/TEXTURES/gltf_embedded_0.webp', 
-  '/TEXTURES/gltf_embedded_1.webp', 
-  '/TEXTURES/gltf_embedded_2.webp', 
-  '/TEXTURES/gltf_embedded_4.webp', 
-  '/TEXTURES/gltf_embedded_5.webp', 
-  '/TEXTURES/gltf_embedded_6.webp', 
-];
+
 
 // Cargar texturas asíncronamente
-const loadTextures = async () => {
-  const loader = new THREE.TextureLoader();
-  const texturePromises = texturePaths.map(path => 
-    new Promise<THREE.Texture>((resolve, reject) => {
-      loader.load(path, resolve, undefined, reject);
-    })
-  );
-  return Promise.all(texturePromises);
-};
 
 interface ModelProps {
   path: string;
@@ -37,8 +22,12 @@ interface ModelProps {
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('/draco/'); // Cambia a la ruta correcta de tu Draco
 
+const ktx2Loader = new KTX2Loader();
+ktx2Loader.setTranscoderPath('/basic/'); // Cambia a la ruta correcta del transcoder
+
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
+gltfLoader.setKTX2Loader(ktx2Loader.detectSupport(new THREE.WebGLRenderer()));
 
 const useDracoGLTF = (path: string) => {
   const [gltf, setGltf] = React.useState<GLTF | null>(null);
@@ -60,60 +49,50 @@ const Model: React.FC<ModelProps> = ({ path }) => {
   useEffect(() => {
     if (!gltf) return;
 
-    (async () => {
-      const textures = await loadTextures();
-      if (ref.current) {
-        let textureIndex = 0;
-        ref.current.traverse((child: THREE.Object3D) => {
-          if ((child as THREE.Mesh).isMesh) {
-            const mesh = child as THREE.Mesh;
-            if (mesh.material) {
-              const material = mesh.material as THREE.MeshStandardMaterial;
-              if (textureIndex < textures.length) {
-                material.map = textures[textureIndex];
-                material.needsUpdate = true;
-                textureIndex++;
-              }
-            } else {
-              if (textureIndex < textures.length) {
-                mesh.material = new THREE.MeshStandardMaterial({ map: textures[textureIndex] });
-                textureIndex++;
-              }
-            }
-          }
-        });
+    if (ref.current) {
+      ref.current.scale.set(0.01, 0.01, 0.01); // Significantly reduce scale to avoid clipping
+      ref.current.position.set(-31, -4, -5); // Ensure the model is centered
 
-        if (gltf.animations && gltf.animations.length > 0) {
-          const mixer = new THREE.AnimationMixer(gltf.scene);
-          gltf.animations.forEach((clip) => {
-            mixer.clipAction(clip).play();
-          });
-          mixerRef.current = mixer;
-        }
+      if (gltf.animations && gltf.animations.length > 0) {
+        const mixer = new THREE.AnimationMixer(gltf.scene);
+        gltf.animations.forEach((clip) => {
+          mixer.clipAction(clip).play();
+        });
+        mixerRef.current = mixer;
       }
-    })();
+    }
   }, [gltf]);
 
   useFrame((state, delta) => {
     if (mixerRef.current) {
       mixerRef.current.update(delta);
     }
+
+    // Simulate levitation animation
+    if (ref.current) {
+      ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1; // Adjust amplitude as needed
+    }
   });
 
   return gltf ? <primitive ref={ref} object={gltf.scene} /> : null;
 };
 
-const ThreeCanvas: React.FC = () => {
+const AstroCanvas: React.FC = () => {
+  const rotationInRadians = 90 * (Math.PI / 180); // Convert 45 degrees to radians
+
   return (
-    <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full">
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 10]} intensity={1} />
-      <group position={[0, -1, 0]} scale={[1.5, 1.5, 1]}>
-        <Model path="/lolDRACOwebp.glb" />
-      </group>
-      <OrbitControls />
-    </Canvas>
+    <Canvas 
+    camera={{ position: [2.5, 2.5, 6], fov: 80 }} 
+    className=""
+  >
+    <ambientLight intensity={0.5} />
+    <directionalLight position={[10, 10, 10]} intensity={1} />
+    <group position={[-3, -3, 7]} scale={[2, 2, 2]} rotation={[-6.6, 0.8, 6]}>
+      <Model path="/astro3.glb" />
+    </group>
+    <OrbitControls />
+  </Canvas>
   );
 };
 
-export default ThreeCanvas;
+export default AstroCanvas;

@@ -1,5 +1,4 @@
-// pages/about.tsx
-"use client"
+"use client";
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Navbar from '../MainPage/navbar';
@@ -11,20 +10,20 @@ const VideoBackground = dynamic(() => import('./VideoBackgroundComponent'), {
   loading: () => <p>Loading background...</p>,
 });
 
-// Lazy load the ThreeCanvas and UfoCanvas components
-const LazyThreeCanvas = dynamic(() => import('../components/AstroCanva'), {
+// Dynamic imports for the components
+const NaveCanvas = dynamic(() => import('../components/AboutMain').then(mod => mod.NaveCanvas), {
   ssr: false,
-  loading: () => <p>Loading ThreeCanvas...</p>,
+  loading: () => <p>Loading NaveCanvas...</p>,
 });
 
-const LazyUfoCanvas = dynamic(() => import('../components/UfoCanva'), {
+const AstroCanvas = dynamic(() => import('../components/AboutMain').then(mod => mod.AstroCanvas), {
   ssr: false,
-  loading: () => <p>Loading UfoCanva...</p>,
+  loading: () => <p>Loading AstroCanvas...</p>,
 });
 
-const LazySpaceShipCanvas = dynamic(() => import('../components/NaveCanva'), {
+const UfoCanvas = dynamic(() => import('../components/AboutMain').then(mod => mod.UfoCanvas), {
   ssr: false,
-  loading: () => <p>Loading UfoCanva...</p>,
+  loading: () => <p>Loading UfoCanvas...</p>,
 });
 
 export default function About() {
@@ -42,9 +41,14 @@ export default function About() {
       </div>
       <VideoBackground />
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-30 mt-16">
-        {loadCanvases && <LazyThreeCanvas />}
-        {loadCanvases && <LazyUfoCanvas />}
-        {loadCanvases && <LazySpaceShipCanvas />}
+        {loadCanvases && (
+          <>
+            
+            <AstroCanvas />
+            <UfoCanvas />
+            <NaveCanvas />
+          </>
+        )}
         <TextContent />
       </div>
     </div>

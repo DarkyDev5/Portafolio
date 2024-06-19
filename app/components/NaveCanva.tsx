@@ -72,12 +72,12 @@ const Model: React.FC<ModelProps> = ({ path }) => {
   return gltf ? <primitive ref={ref} object={gltf.scene} /> : null;
 };
 
-const ThreeCanvas: React.FC = () => {
+const NaveCanvas: React.FC = () => {
   return (
     <Canvas camera={{ position: [0, 2, 5], fov: 60 }} className="absolute top-0 left-0 w-full h-full">
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 10]} intensity={1} />
-      <group position={[0, -1, 0]} scale={[1.5, 1.5, 1]}>
+      <group position={[0, 0, 0]} scale={[1.5, 1.5, 1]}>
         <Model path="/Nave3.glb" />
       </group>
       <OrbitControls />
@@ -85,4 +85,4 @@ const ThreeCanvas: React.FC = () => {
   );
 };
 
-export default ThreeCanvas;
+export default NaveCanvas;
