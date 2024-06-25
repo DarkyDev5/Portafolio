@@ -1,0 +1,29 @@
+.parallax {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .bgSky {
+    background-image: url('/sky2.jpg');
+    z-index: 1;
+  }
+  
+  .bgEarth {
+    background-image: url('/earth2.png');
+    z-index: 2;
+    background-position: center bottom;
+    height: 100%;
+    bottom: -100%;
+  }

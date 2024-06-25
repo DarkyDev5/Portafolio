@@ -1,88 +1,81 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
-import { Canvas, useFrame, extend } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import React from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
 
-// Extend OrbitControls
-extend({ OrbitControls });
+// Configuración de los loaders
+const dracoLoader = new DRACOLoader().setDecoderPath('/draco/');
+const ktx2Loader = new KTX2Loader().setTranscoderPath('/basic/');
+const gltfLoader = new GLTFLoader().setDRACOLoader(dracoLoader).setKTX2Loader(ktx2Loader.detectSupport(new THREE.WebGLRenderer()));
 
-interface ModelProps {
-  path: string;
-}
-
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('/draco/'); // Ensure Draco files are located at public/draco/
-
-const ktx2Loader = new KTX2Loader();
-ktx2Loader.setTranscoderPath('/basic/'); // Update to the correct path for the transcoder
-
-const gltfLoader = new GLTFLoader();
-gltfLoader.setDRACOLoader(dracoLoader);
-gltfLoader.setKTX2Loader(ktx2Loader.detectSupport(new THREE.WebGLRenderer()));
-
+// Hook personalizado para cargar modelos GLTF
 const useDracoGLTF = (path: string) => {
   const [gltf, setGltf] = React.useState<THREE.Group | null>(null);
   const [error, setError] = React.useState<string | null>(null);
 
-  useEffect(() => {
-    gltfLoader.load(
-      path,
-      (gltf) => {
-        setGltf(gltf.scene as THREE.Group); // Cast gltf.scene to THREE.Group
-        console.log(`Model loaded: ${path}`, gltf);
-      },
-      undefined,
-      (err) => {
-        console.error(`Failed to load model: ${path}`, err);
-        setError(`Failed to load model: ${path}`);
-      }
-    );
+  React.useEffect(() => {
+    gltfLoader.load(path, (gltf) => {
+      console.log(`Loaded model: ${path}`, gltf.scene);
+      setGltf(gltf.scene);
+    }, undefined, (err) => {
+      console.error(`Failed to load model: ${path}`, err);
+      setError(`Failed to load model: ${path}`);
+    });
   }, [path]);
 
   return { gltf, error };
 };
 
-const Model: React.FC<ModelProps> = ({ path }) => {
+// Props para el componente de modelo
+interface ModelProps {
+  path: string;
+  scale: [number, number, number];
+  position: [number, number, number];
+  rotation?: [number, number, number];
+}
+
+const Model: React.FC<ModelProps> = ({ path, scale, position, rotation }) => {
   const { gltf, error } = useDracoGLTF(path);
-  const ref = useRef<THREE.Group>(null);
-  const mixerRef = useRef<THREE.AnimationMixer | null>(null);
+  const ref = React.useRef<THREE.Group>(null);
+  const mixerRef = React.useRef<THREE.AnimationMixer | null>(null);
 
-  useEffect(() => {
-    if (!gltf) return;
-
-    if (ref.current) {
-      ref.current.scale.set(0.1, 0.1, 0.1);
-      ref.current.position.set(0, 0, 0);
-
+  React.useEffect(() => {
+    if (gltf && ref.current) {
+      ref.current.scale.set(...scale);
+      ref.current.position.set(...position);
+      if (rotation) {
+        ref.current.rotation.set(...rotation);
+      }
       const animations = gltf.animations || [];
       if (animations.length > 0) {
         const mixer = new THREE.AnimationMixer(gltf);
-        const defaultAction = mixer.clipAction(animations[0]);
-        defaultAction.play();
+        mixer.clipAction(animations[0]).play();
         mixerRef.current = mixer;
       }
     }
-  }, [gltf]);
+  }, [gltf, scale, position, rotation]);
 
   useFrame((state, delta) => {
-    if (mixerRef.current) {
-      mixerRef.current.update(delta);
-    }
-
+    mixerRef.current?.update(delta);
     if (ref.current) {
-      ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.05;
-
-      if (path === "/UFO5.glb") {
-        ref.current.position.x = Math.cos(state.clock.elapsedTime) * 0.2;
-        ref.current.position.z = Math.sin(state.clock.elapsedTime) * 0.1;
-      }
-
-      if (path === "/Nave3.glb") {
-        ref.current.position.z = Math.sin(state.clock.elapsedTime) * 3;
+      if (path === "/earth3.glb") {
+        // Rotación de la Tierra sobre su propio eje
+        ref.current.rotation.y += delta * 0.1;
+      } else if (path === "/moon.glb") {
+        // Animación de la Luna orbitando alrededor de la Tierra con rotación de 45 grados
+        const earthPosition = new THREE.Vector3(4, 0, 0); // Posición de la Tierra
+        const moonOrbitRadius = 2;
+        const moonOrbitSpeed = 0.5; // Velocidad de órbita de la Luna
+        ref.current.position.x = earthPosition.x + moonOrbitRadius * Math.cos(state.clock.elapsedTime * moonOrbitSpeed);
+        ref.current.position.z = earthPosition.z + moonOrbitRadius * Math.sin(state.clock.elapsedTime * moonOrbitSpeed);
+        ref.current.rotation.y += delta * 0.5; // Rotación en su propio eje
+        ref.current.rotation.z = THREE.MathUtils.degToRad(80); // Rotación en 80 grados en el eje Z
+      } else {
+        // Animación general de subir y bajar
+        ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime) * 0.5;
       }
     }
   });
@@ -94,53 +87,20 @@ const Model: React.FC<ModelProps> = ({ path }) => {
   return gltf ? <primitive ref={ref} object={gltf} /> : null;
 };
 
+const SceneCanvas: React.FC = () => (
+  <Canvas camera={{ position: [0, 3, 7], fov: 60 }} className="absolute top-0 left-0 w-full h-full">
+    <ambientLight intensity={0.5} />
+    <directionalLight position={[5, 5, 5]} intensity={1} />
+    <Model path="/astro1.glb" position={[-5, 0, 0]} scale={[1, 1, 1]} />
+    <Model path="/earth3.glb" position={[4.3, 1.5, 0]} scale={[0.1, 0.1, 0.1]} />
+    <Model path="/moon.glb" position={[-1.5, 1, 0]} scale={[0.04, 0.04, 0.04]} rotation={[THREE.MathUtils.degToRad(3), THREE.MathUtils.degToRad(2), THREE.MathUtils.degToRad(20)]} />
+  </Canvas>
+);
 
-const NaveCanvas: React.FC = () => {
-  return (
-    <Canvas
-      camera={{ position: [0, 3, 7], fov: 60 }}
-      className="absolute top-0 left-0 w-full h-full"
-    >
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <group position={[-10, 1, 0]} scale={[0.04, 0.04, 0.04]} rotation={[0, -0.7, 0]}>
-        <Model path="/Nave3.glb" />
-      </group>
-      <OrbitControls />
-    </Canvas>
-  );
-};
+const AboutMain: React.FC = () => (
+  <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+    <SceneCanvas />
+  </div>
+);
 
-const AstroCanvas: React.FC = () => {
-  return (
-    <Canvas
-      camera={{ position: [0, 3, 10], fov: 80 }}
-      className="absolute top-0 left-0 w-full h-full"
-    >
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <group position={[0, -5, 0]} scale={[40, 40, 40]} rotation={[0, 0, 0.7]}>
-        <Model path="/astro4.glb" />
-      </group>
-      <OrbitControls />
-    </Canvas>
-  );
-};
-
-const UfoCanvas: React.FC = () => {
-  return (
-    <Canvas
-      camera={{ position: [0, 3, 7], fov: 60 }}
-      className="absolute top-0 left-0 w-full h-full"
-    >
-      <ambientLight intensity={1} />
-      <directionalLight position={[5, 5, 5]} intensity={1.5} />
-      <group position={[16, -0.6, 0]} scale={[7, 7, 7]} rotation={[1, -1.7, 0.6]}>
-        <Model path="/UFO5.glb" />
-      </group>
-      <OrbitControls />
-    </Canvas>
-  );
-};
-
-export { NaveCanvas, AstroCanvas, UfoCanvas };
+export default AboutMain;

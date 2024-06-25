@@ -16,10 +16,34 @@ const config: Config = {
       },
       colors: {
         'dom-blue': '#000f4a',
-      }
+      },
+      perspective: {
+        '1000': '1000px',
+      },
+      perspectiveOrigin: {
+        'center': 'center',
+      },
+      transformStyle: {
+        'preserve-3d': 'preserve-3d',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-3d'),
+    require('tailwindcss/plugin')(function({ addUtilities }: { addUtilities: (utilities: object, variants: string[]) => void }) {
+      addUtilities({
+        '.perspective-1000': {
+          perspective: '1000px',
+        },
+        '.preserve-3d': {
+          transformStyle: 'preserve-3d',
+        },
+        '.transform-center': {
+          transformOrigin: 'center',
+        },
+      }, ['responsive']);
+    }),
+  ],
 };
 
 export default config;
