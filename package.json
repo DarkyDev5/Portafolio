@@ -13,6 +13,7 @@
     "@react-spring/web": "^9.7.3",
     "@react-three/drei": "^9.106.2",
     "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.16.2",
     "@studio-freight/lenis": "^1.0.42",
     "@types/nodemailer": "^6.4.15",
     "@types/three": "^0.165.0",

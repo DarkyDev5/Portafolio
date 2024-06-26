@@ -5,9 +5,11 @@ import dynamic from 'next/dynamic';
 
 // Importamos el componente AboutMain de manera dinámica
 const AboutMain = dynamic(() => import('../components/AboutMain'), {
-  ssr: false, // Indicamos que este componente solo se cargará en el lado del cliente
-  loading: () => <p>Loading...</p>, // Opcional: mostrar algo mientras se carga el componente
+  ssr: false,
+  loading: () => <p>Loading...</p>,
 });
+
+
 
 const TextContent: React.FC = () => {
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
@@ -28,8 +30,10 @@ const TextContent: React.FC = () => {
   }, []);
 
   return (
+
+    
     <div className="relative w-full h-screen text-white overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20">
         <h1 ref={mainTitleRef} className="text-6xl font-bold mb-2">Sobre Nosotros</h1>
         <div ref={subTitleRef} className="text-xl text-gray-300 mb-8">SOBRE NOSOTROS</div>
         <p className="max-w-2xl mx-auto text-gray-400 text-sm">
@@ -37,7 +41,7 @@ const TextContent: React.FC = () => {
         </p>
       </div>
 
-      <div ref={linksRef} className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-full max-w-4xl">
+      <div ref={linksRef} className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-20">
         <div className="flex justify-between text-sm">
           <a href="#" className="hover:text-gray-300">Our Mission</a>
           <a href="#" className="hover:text-gray-300">Vision Mean</a>
@@ -53,6 +57,7 @@ const TextContent: React.FC = () => {
           <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
         </div>
       </div>
+
 
       {/* Integrate AboutMain component for 3D models */}
       <AboutMain />

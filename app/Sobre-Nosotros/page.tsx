@@ -4,7 +4,7 @@ import TextContent from './TextContent';
 
 import Parallax from '../components/Parallax';
 
-
+import LeadershipSection from '../components/LeadershipSection';
 
 export default function About() {
     
@@ -18,6 +18,7 @@ export default function About() {
                 <TextContent />
                 
             </Parallax>
+            <LeadershipSection />
         </div>
     );
 }
