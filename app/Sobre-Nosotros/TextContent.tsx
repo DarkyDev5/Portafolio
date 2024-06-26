@@ -1,7 +1,13 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import AboutMain from '../components/AboutMain'; // Importamos el componente principal
+import dynamic from 'next/dynamic';
+
+// Importamos el componente AboutMain de manera dinámica
+const AboutMain = dynamic(() => import('../components/AboutMain'), {
+  ssr: false, // Indicamos que este componente solo se cargará en el lado del cliente
+  loading: () => <p>Loading...</p>, // Opcional: mostrar algo mientras se carga el componente
+});
 
 const TextContent: React.FC = () => {
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
